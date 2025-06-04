@@ -1,7 +1,5 @@
 # ShopSmart - Современные Списки Покупок
 
-![ShopSmart Logo](https://via.placeholder.com/200x100/6366f1/ffffff?text=ShopSmart)
-
 **ShopSmart** — это современное веб-приложение для создания и управления списками покупок с возможностью совместного использования в реальном времени, интеграцией с AI-помощником и минималистичным дизайном.
 
 ## 🚀 Ключевые Возможности
@@ -83,41 +81,7 @@ OPENAI_API_KEY=your_openai_api_key
 NEXT_PUBLIC_APP_URL=http://localhost:3000
 ```
 
-### 4. Настройка Базы Данных
-
-Выполните SQL скрипты в Supabase:
-
-```sql
--- Создание таблиц
-CREATE TABLE shopping_lists (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
-  created_by TEXT,
-  is_public BOOLEAN DEFAULT FALSE,
-  allow_anonymous_edit BOOLEAN DEFAULT FALSE,
-  share_token TEXT UNIQUE,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
-CREATE TABLE shopping_items (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  list_id UUID REFERENCES shopping_lists(id) ON DELETE CASCADE,
-  text TEXT NOT NULL,
-  purchased BOOLEAN DEFAULT FALSE,
-  price DECIMAL(10,2),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Настройка Row Level Security
-ALTER TABLE shopping_lists ENABLE ROW LEVEL SECURITY;
-ALTER TABLE shopping_items ENABLE ROW LEVEL SECURITY;
-
--- Политики RLS (см. документацию для полного списка)
-```
-
-### 5. Запуск Приложения
+### 4. Запуск Приложения
 
 ```bash
 npm run dev
@@ -359,40 +323,3 @@ components/
 - **Performance**: Глобальная CDN и Edge функции
 - **Интеграция**: Отличная совместимость с Next.js
 - **Analytics**: Встроенная аналитика производительности
-
-## 📈 Будущие Планы
-
-- [ ] Мобильное приложение (React Native)
-- [ ] Offline поддержка с синхронизацией
-- [ ] Расширенная AI интеграция (категоризация, умные предложения)
-- [ ] Интеграция с продуктовыми API для актуальных цен
-- [ ] Командные функции (роли, права доступа)
-- [ ] Аналитика покупок и трендов
-
-## 🤝 Вклад в Проект
-
-Мы приветствуем вклад в развитие проекта! Пожалуйста:
-
-1. Форкните репозиторий
-2. Создайте feature branch (`git checkout -b feature/amazing-feature`)
-3. Коммитьте изменения (`git commit -m 'Add amazing feature'`)
-4. Пушьте в branch (`git push origin feature/amazing-feature`)
-5. Создайте Pull Request
-
-## 📝 Лицензия
-
-Этот проект распространяется под лицензией MIT. См. файл `LICENSE` для подробностей.
-
-## 👨‍💻 Авторы
-
-- **Ваше Имя** - _Начальная разработка_ - [YourGithub](https://github.com/yourusername)
-
-## 🙏 Благодарности
-
-- Команде Supabase за отличную документацию
-- Сообществу Next.js за активную поддержку
-- Всем beta-тестерам за ценную обратную связь
-
----
-
-**ShopSmart** - Делаем покупки умнее! 🛒✨
